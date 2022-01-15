@@ -1,0 +1,25 @@
+server:
+  port: 8999
+
+eureka:
+  instance:
+    hostname: localhost
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: customer-service
+          uri: lb://customer-service
+          predicates:
+            - Path=/customer_service/**
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/Product_Service/**
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/order_service/**
